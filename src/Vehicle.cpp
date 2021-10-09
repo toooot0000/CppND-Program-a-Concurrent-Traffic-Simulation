@@ -12,7 +12,6 @@ Vehicle::Vehicle()
     _speed = 400; // m/s
 }
 
-
 void Vehicle::setCurrentDestination(std::shared_ptr<Intersection> destination)
 {
     // update destination
@@ -36,7 +35,7 @@ void Vehicle::drive()
     std::cout << "Vehicle #" << _id << "::drive: thread id = " << std::this_thread::get_id() << std::endl;
     lck.unlock();
 
-    // initalize variables
+    // initialize variables
     bool hasEnteredIntersection = false;
     double cycleDuration = 1; // duration of a single simulation cycle in ms
     std::chrono::time_point<std::chrono::system_clock> lastUpdate;
@@ -106,9 +105,9 @@ void Vehicle::drive()
                     // this street is a dead-end, so drive back the same way
                     nextStreet = _currStreet;
                 }
-                
+
                 // pick the one intersection at which the vehicle is currently not
-                std::shared_ptr<Intersection> nextIntersection = nextStreet->getInIntersection()->getID() == _currDestination->getID() ? nextStreet->getOutIntersection() : nextStreet->getInIntersection(); 
+                std::shared_ptr<Intersection> nextIntersection = nextStreet->getInIntersection()->getID() == _currDestination->getID() ? nextStreet->getOutIntersection() : nextStreet->getInIntersection();
 
                 // send signal to intersection that vehicle has left the intersection
                 _currDestination->vehicleHasLeft(get_shared_this());
